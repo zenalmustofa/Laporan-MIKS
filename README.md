@@ -2,9 +2,7 @@
 
 **Mata Kuliah:** Manajemen Infrastruktur Keamanan Siber (MIKS)  
 **Institusi:** Institut Teknologi Sepuluh Nopember (ITS)  
-**Kelompok:** ITS-Kelompok2  
-**Tanggal Pengerjaan:** Mei 2026  
-**Platform:** Microsoft Azure (Azure for Students)
+**Kelompok:** Kelompok2  
 
 ---
 
@@ -938,56 +936,3 @@ Proyek ini berhasil membuktikan bahwa:
 - [Azure Virtual Machine Documentation](https://docs.microsoft.com/azure/virtual-machines/)
 - [EICAR Test File Standard](https://www.eicar.org/download-anti-malware-testfile/)
 
----
-
-## Appendix — Quick Reference Commands
-
-### SSH Access
-
-```powershell
-# Manager
-ssh -i "path\wazuh-manager-key.pem" azureuser@70.153.86.7
-
-# Agent-1
-ssh -i "path\wazuh-manager-key.pem" azureuser@70.153.151.52
-
-# Agent-2
-ssh -i "path\wazuh-manager-key.pem" azureuser@48.193.46.1
-```
-
-### Service Management
-
-```bash
-# Cek semua service sekaligus
-for svc in wazuh-manager wazuh-indexer wazuh-dashboard filebeat; do
-  echo "=== $svc ===" && sudo systemctl status $svc | grep Active
-done
-```
-
-### Monitoring Commands
-
-```bash
-# Real-time alert monitoring
-sudo tail -f /var/ossec/logs/alerts/alerts.log
-
-# Filter DDoS alerts saja
-sudo tail -f /var/ossec/logs/alerts/alerts.log | grep -E "100200|100201|100202|FLOOD"
-
-# Hitung alert per rule
-sudo grep -c "100200" /var/ossec/logs/alerts/alerts.log   # SYN
-sudo grep -c "100201" /var/ossec/logs/alerts/alerts.log   # UDP
-sudo grep -c "100202" /var/ossec/logs/alerts/alerts.log   # ICMP
-
-# Cek buffer status
-sudo grep -i "buffer" /var/ossec/logs/ossec.log | tail -20
-```
-
-### Dashboard Access
-
-```
-URL      : https://70.153.86.7
-Username : admin
-Password : admin
-```
-
----
