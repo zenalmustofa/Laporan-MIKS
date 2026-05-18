@@ -470,6 +470,7 @@ Rule: 100200 (level 12) → 'Possible SYN Flood attack detected via iptables'
 Agent: wazuh-agent-1 | IP: 10.0.0.5
 Groups: ddos, network, attack
 ```
+![Sync Flood](assets/02_serangan_sync_flood.png)
 
 ### 6.3 Serangan 2 — UDP Flood
 
@@ -498,6 +499,7 @@ Rule: 100201 (level 12) → 'Possible UDP Flood attack detected via iptables'
 Agent: wazuh-agent-1 | IP: 10.0.0.5
 Groups: ddos, network, attack
 ```
+![Sync Flood](assets/03_serangan_udp_flood.png)
 
 ### 6.4 Serangan 3 — ICMP Flood (Ping Flood)
 
@@ -517,6 +519,7 @@ sudo hping3 --icmp --flood -V 10.0.0.5
 --- 10.0.0.5 hping statistic ---
 5,982,903 packets transmitted, 0 packets received, 100% packet loss
 ```
+![Sync Flood](assets/04_icmp_flood.png)
 
 **Deteksi:**  
 Karena volume ICMP yang sangat tinggi menyebabkan buffer overflow pada agent, bukti deteksi ICMP disajikan dalam 3 lapis (lihat [Analisis Log Density](#10-analisis-log-density)).
