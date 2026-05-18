@@ -1,7 +1,7 @@
 # 🛡️ Laporan Teknis: Wazuh SIEM Lab — DDoS Detection & Analysis
 
 **Mata Kuliah:** Manajemen Infrastruktur Keamanan Siber (MIKS)  
-**Institusi:** Institut Teknologi Sepuluh Nopember (ITS)  
+**Departemen:** Teknologi Informasi  
 **Kelompok:** Kelompok2  
 
 ---
