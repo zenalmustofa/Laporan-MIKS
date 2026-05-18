@@ -470,7 +470,7 @@ Rule: 100200 (level 12) → 'Possible SYN Flood attack detected via iptables'
 Agent: wazuh-agent-1 | IP: 10.0.0.5
 Groups: ddos, network, attack
 ```
-![Sync Flood](assets/02_serangan_sync_flood.png)
+![Sync Flood](assets/02_sync_flood.png)
 
 ### 6.3 Serangan 2 — UDP Flood
 
