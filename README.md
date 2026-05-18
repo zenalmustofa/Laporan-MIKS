@@ -52,17 +52,17 @@ Laporan ini mendokumentasikan implementasi lengkap platform **Wazuh SIEM** di at
 
 ```
 ┌─────────────────────────────────────────────────────────────┐
-│                   Azure VNet: wazuh-manager-vnet             │
-│                     Subnet: 10.0.0.0/24                      │
-│                                                              │
+│                   Azure VNet: wazuh-manager-vnet            │
+│                     Subnet: 10.0.0.0/24                     │
+│                                                             │
 │  ┌──────────────────┐    Port 1514 (TCP)    ┌─────────────┐ │
-│  │  wazuh-manager   │◄─────────────────────│wazuh-agent-1│ │
+│  │  wazuh-manager   │◄───────────────────── │wazuh-agent-1│ │
 │  │  10.0.0.4        │                       │  10.0.0.5   │ │
 │  │  (Manager +      │    Port 1514 (TCP)    │  (TARGET)   │ │
-│  │   Indexer +      │◄─────────────────────└─────────────┘ │
+│  │   Indexer +      │◄───────────────────── └─────────────┘ │
 │  │   Dashboard)     │                                       │
 │  │                  │    Port 1514 (TCP)    ┌─────────────┐ │
-│  └──────────────────┘◄─────────────────────│wazuh-agent-2│ │
+│  └──────────────────┘◄───────────────────── │wazuh-agent-2│ │
 │                                             │  10.0.0.6   │ │
 │                                             │  (ATTACKER) │ │
 │                                             └─────────────┘ │
@@ -163,6 +163,7 @@ icacls "C:\path\to\wazuh-manager-key.pem" /inheritance:r /grant:r "$($env:USERNA
 # SSH ke Manager
 ssh -i "C:\path\to\wazuh-manager-key.pem" azureuser@70.153.86.7
 ```
+<img width="1581" height="737" alt="image" src="https://github.com/user-attachments/assets/32f0e98b-24f5-4f0a-a580-c438f41ef0d9" />
 
 ### 4.5 Instalasi Wazuh Manager
 
@@ -351,6 +352,7 @@ sudo systemctl start filebeat
 sudo filebeat test output
 # Output yang benar: parse url...OK | dial up...OK | handshake...OK | talk to server...OK
 ```
+<img width="968" height="186" alt="image" src="https://github.com/user-attachments/assets/872b8401-dac1-4e2d-824a-2a834fc5282e" />
 
 ### 5.4 Instalasi Wazuh Agent di VM Agent-1 & Agent-2
 
@@ -409,15 +411,21 @@ sudo systemctl restart wazuh-agent
 sudo /var/ossec/bin/agent_control -l
 ```
 
-**Output yang diharapkan:**
+**Output:**
 
-```
-ID: 000, Name: wazuh-manager, IP: 127.0.0.1, Status: Active/Local
-ID: 001, Name: wazuh-agent-1, IP: any,       Status: Active
-ID: 002, Name: wazuh-agent-2, IP: any,       Status: Active
-```
+<img width="903" height="147" alt="image" src="https://github.com/user-attachments/assets/7f8280c8-19ed-4ca0-8fe6-4f0f3e6241ea" />
 
 **Hasil:** Kedua agent berhasil terdaftar dengan status **Active** ✅
+
+### 5.7 Verifikasi di Dashboard
+
+<img width="1918" height="870" alt="image" src="https://github.com/user-attachments/assets/3dac99c1-0d96-4e9e-9a3b-eaa0fd0ff625" />
+
+*Wazuh Dashboard berhasil diakses, halaman Overview*
+
+<img width="1918" height="752" alt="image" src="https://github.com/user-attachments/assets/6a54458a-c4f5-4e1b-8609-e49da8fc0ca7" />
+
+*Halaman Agents di Dashboard — 2 agent berstatus Active (hijau)*
 
 ---
 
@@ -471,6 +479,7 @@ Agent: wazuh-agent-1 | IP: 10.0.0.5
 Groups: ddos, network, attack
 ```
 ![Sync Flood](assets/02_sync_flood.png)
+<img width="760" height="188" alt="image" src="https://github.com/user-attachments/assets/ef06c6f1-668c-471e-8143-3ac3ca501162" />
 
 ### 6.3 Serangan 2 — UDP Flood
 
@@ -500,6 +509,7 @@ Agent: wazuh-agent-1 | IP: 10.0.0.5
 Groups: ddos, network, attack
 ```
 ![Sync Flood](assets/03_serangan_udp_flood.png)
+<img width="753" height="117" alt="image" src="https://github.com/user-attachments/assets/5aa55397-8f91-4d3a-b627-de24c95109c1" />
 
 ### 6.4 Serangan 3 — ICMP Flood (Ping Flood)
 
@@ -781,6 +791,9 @@ rule.level: 12
 rule.description: ClamAV detected malware on this agent
 rule.groups: ddos, network, attack, malware, antivirus, attack
 ```
+<img width="757" height="175" alt="image" src="https://github.com/user-attachments/assets/e3aeb367-bc14-4d16-ab42-778a7c7a0ca3" />
+<img width="743" height="317" alt="image" src="https://github.com/user-attachments/assets/0d21d1d2-0d54-4540-8d8d-b5f24723f7ec" />
+
 
 **Agent-2 (Rule 100301 — level 14):**
 
@@ -793,6 +806,9 @@ rule.groups: ddos, network, attack, malware, antivirus, attack
 ```
 
 > Rule 100301 di-trigger dengan level **14** (lebih tinggi) karena mendeteksi signature EICAR secara spesifik — bukti modul malware berfungsi dengan benar.
+
+<img width="752" height="112" alt="image" src="https://github.com/user-attachments/assets/063add65-0a55-4189-911b-2e70a1a7e702" />
+<img width="746" height="311" alt="image" src="https://github.com/user-attachments/assets/efefcc1b-cf36-47d4-8492-458861323959" />
 
 ---
 
