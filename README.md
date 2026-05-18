@@ -127,7 +127,7 @@ Environment = Lab
 ```
 
 > Region `indonesiacentral` dipilih karena merupakan salah satu region yang diizinkan oleh policy ITS, bersama `centralindia`, `malaysiawest`, `eastasia`, dan `koreacentral`.
-
+![Resource Group Created](assets/01_resource_group.png)
 ### 4.2 Instalasi Azure CLI
 
 ```powershell
