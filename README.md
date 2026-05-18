@@ -991,5 +991,3 @@ Password : admin
 ```
 
 ---
-
-*Laporan ini dibuat oleh Orang 4 (Zaenal) sebagai dokumentasi teknis final Group Task #1 mata kuliah MIKS — ITS Kelompok 2, Mei 2026.*
